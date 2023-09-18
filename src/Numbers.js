@@ -42,8 +42,11 @@ export const Numbers = () => {
         setPicked([])
     }
 
-    useEffect(() => {
-        if (correctGuess) {
+    const getNumber = e => {
+        const correct = parseInt(e.target.id) === challenge
+        setCorrectGuess(correct)
+        if (correct) {
+            setPicked([...picked, challenge]);
             setNumberOfGuesses(0);
             const updatedGuessList = guessList.filter(g => g.key !== challenge);
             setGuessList(updatedGuessList)
@@ -52,14 +55,7 @@ export const Numbers = () => {
             } else {
                 setGameOver(true)
             }
-            // console.log({ picked })
         }
-    }, [totalGuesses]);
-
-    const getNumber = e => {
-        const correct = parseInt(e.target.id) === challenge
-        setCorrectGuess(correct)
-        if (correct) setPicked([...picked, challenge])
         setGuess(parseInt(e.target.id))
         setNumberOfGuesses(prev => prev + 1)
         setTotalGuesses(prev => prev + 1)
@@ -75,11 +71,12 @@ export const Numbers = () => {
 
             <div className="numbers">
                 {numbers.map(n => <button onClick={e => getNumber(e)} id={n.key} key={n.key}
+                    disabled={picked.includes(n.key)}
                     className={[
                         gameOver ? "game-over" :
                             correctGuess && guess === n.key ? "right" :
                                 !correctGuess && guess === n.key ? "wrong" :
-                                    numberOfGuesses > 2 && challenge === n.key ? " hint" :
+                                    numberOfGuesses > 3 && challenge === n.key ? " hint" :
                                         "", picked.includes(n.key) ? " picked" : ""].join(' ')}>{n.value}</button>
                 )}
             </div>
