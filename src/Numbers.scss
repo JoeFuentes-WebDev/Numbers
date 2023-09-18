@@ -33,23 +33,23 @@ h4 {
         background-color: lightgoldenrodyellow;
     }    
     &.right {
-        font-size: 45px;
+        font-size: 40px;
         color: green;
         border-color: green
     }
     &.wrong {
-        font-size: 45px;
+        font-size: 40px;
         color: red;
         border-color: red
     }
     &.hint {
         background-color: lightsteelblue;
-        font-size: 45px;
+        font-size: 40px;
         color: orange;
     }
     &.game-over {
         background-color: lightseagreen;
-        font-size: 45px;
+        font-size: 40px;
         color: blue;
     }
 }
