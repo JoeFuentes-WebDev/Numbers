@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import "./Numbers.css";
+import "./Numbers.scss";
 
 export const Numbers = () => {
 
@@ -62,12 +62,15 @@ export const Numbers = () => {
     }
     return (
         <>
-            <h1>numbers</h1>
+            <h1>Numbers</h1>
             <select onChange={e => setNumberNames(language[e.target.value])}>
                 {Object.keys(language).map(lang => <option key={lang}>{lang}</option>)}
             </select>
-            <button onClick={reset}>Reset Game</button>
-            {gameOver ? <h4>Game Over :  {(count / totalGuesses * 100).toFixed(2)}%</h4> : <h4>"{numberNames[challenge - 1]}"</h4>}
+            <button className="reset" onClick={reset}>Reset Game</button>
+            {gameOver ?
+                <h5>Game Over :  {(count / totalGuesses * 100).toFixed(2)}%</h5> :
+                <h4>"{numberNames[challenge - 1]}"</h4>
+            }
 
             <div className="numbers">
                 {numbers.map(n => <button onClick={e => getNumber(e)} id={n.key} key={n.key}
