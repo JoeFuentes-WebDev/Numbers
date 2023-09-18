@@ -24,10 +24,10 @@ export const Numbers = () => {
     for (let i = 1; i <= count; i++) {
         numbers.push({ key: i, value: i })
     }
-    const randomNumber = count => {
-        return Math.ceil(Math.random() * count);
+    const randomNumber = items => {
+        return Math.ceil(Math.random() * items);
     }
-    const [challenge, setChallenge] = useState(4);
+    const [challenge, setChallenge] = useState(randomNumber(9));
     const [guessList, setGuessList] = useState(numbers);
     const [gameOver, setGameOver] = useState(false)
 
