@@ -20,7 +20,7 @@ h4 {
 }
 
 .numbers button {
-    font-size: 30px;
+    font-size: 40px;
     cursor: pointer;
     width: 75px;
     max-width:75px;
@@ -34,23 +34,23 @@ h4 {
         background-color: lightgoldenrodyellow;
     }    
     &.right {
-        font-size: 40px;
+        font-weight: bolder;
         color: green;
         border-color: green
     }
     &.wrong {
-        font-size: 40px;
+        font-weight: bolder;
         color: red;
         border-color: red
     }
     &.hint {
         background-color: lightsteelblue;
-        font-size: 40px;
+        font-weight: bolder;
         color: orange;
     }
     &.game-over {
         background-color: lightseagreen;
-        font-size: 40px;
+        font-weight: bolder;
         color: blue;
     }
 }
