@@ -1,0 +1,42 @@
+.numbers {
+    display: grid;
+    grid-template-columns: repeat(3, 50px);
+    border: 2px solid white
+}
+
+.numbers button {
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+button.picked {
+    background-color: lightgoldenrodyellow;
+}
+button.right {
+    font-size: x-large;
+    color: green;
+    border-color: green
+}
+button.wrong {
+    font-size: x-large;
+    color: red;
+    border-color: red
+}
+
+button.hint {
+    background-color: lightsteelblue;
+    font-size: x-large;
+    color: orange;
+}
+
+button.game-over {
+    background-color: lightseagreen;
+    font-size: x-large;
+    color: blue;
+}
