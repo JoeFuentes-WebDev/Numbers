@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import "./Numbers.scss";
+import { NumbersData } from './data/NumbersData'
+import { utils } from './utils';
 
 export const Numbers = () => {
 
@@ -11,26 +13,13 @@ export const Numbers = () => {
     const count = 9;
     const numbers = [];
 
-    const language = {
-        english: ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'],
-        spanish: ['uno', 'dos', 'tres', 'cuatro', 'cinco', 'seis', 'siete', 'ocho', 'nueve'],
-        italian: ['uno', 'due', 'tre', 'quattro', 'cinque', 'sei', 'sette', 'otto', 'nove'],
-        french: ['un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf'],
-        german: ['eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun'],
-        japanese: ['いち', 'に', 'さん', 'し、よん', 'ご', 'ろく', 'しち、なな', 'はち', 'きゅう、く'],
-        chinese: ['一', '二', '三', '四', '五', '六', '七', '八', '九'],
-        esperanto: ['unu', 'du', 'tri', 'kvar', 'kvin', 'ses', 'sep', 'ok', 'naŭ'],
-    }
-
-    const [numberNames, setNumberNames] = useState(language['english'])
+    const [numberNames, setNumberNames] = useState(NumbersData['english'])
 
     for (let i = 1; i <= count; i++) {
         numbers.push({ key: i, value: i })
     }
-    const randomNumber = items => {
-        return Math.ceil(Math.random() * items);
-    }
-    const [challenge, setChallenge] = useState(randomNumber(9));
+
+    const [challenge, setChallenge] = useState(utils.randomNumber(9));
     const [guessList, setGuessList] = useState(numbers);
     const [gameOver, setGameOver] = useState(false)
 
@@ -41,8 +30,13 @@ export const Numbers = () => {
         setTotalGuesses(0);
         setGameOver(false);
         setGuessList(numbers)
-        setChallenge(randomNumber(count))
+        setChallenge(utils.randomNumber(count))
         setPicked([])
+    }
+
+    const setLanguage = language => {
+        setNumberNames(NumbersData[language]);
+        reset();
     }
 
     const getNumber = e => {
@@ -54,7 +48,7 @@ export const Numbers = () => {
             const updatedGuessList = guessList.filter(g => g.key !== challenge);
             setGuessList(updatedGuessList)
             if (updatedGuessList.length) {
-                setChallenge(updatedGuessList[randomNumber(updatedGuessList.length) - 1].key)
+                setChallenge(updatedGuessList[utils.randomNumber(updatedGuessList.length) - 1].key)
             } else {
                 setGameOver(true)
             }
@@ -66,12 +60,12 @@ export const Numbers = () => {
     return (
         <>
             <h1>Numbers</h1>
-            <select onChange={e => setNumberNames(language[e.target.value])}>
-                {Object.keys(language).map(lang => <option key={lang}>{lang}</option>)}
+            <select onChange={e => setLanguage(e.target.value)}>
+                {Object.keys(NumbersData).map(lang => <option key={lang}>{lang}</option>)}
             </select>
             <button className="reset" onClick={reset}>Reset Game</button>
             {gameOver ?
-                <h5>Game Over :  {(count / totalGuesses * 100).toFixed(2)}%</h5> :
+                <h5>{(count / totalGuesses * 100).toFixed(2)}%</h5> :
                 <h4>"{numberNames[challenge - 1]}"</h4>
             }
 
@@ -87,7 +81,6 @@ export const Numbers = () => {
                 )}
             </div>
 
-            {gameOver && <div></div>}
         </>
     )
 }
