@@ -18,22 +18,23 @@ p {
     margin-top: 5px;
     font-size: 60px;
     & img {
-        width: 225px;
         height: 225px;
     }
 }
 
 .tiles {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
     border: 2px solid white;
+    display: grid;
+    &.three {grid-template-columns: repeat(3, auto);}
+    &.four {grid-template-columns: repeat(4, auto);}
+    &.five {grid-template-columns: repeat(5, auto);}
 
     button {
+        padding:15px;
         font-size: 40px;
         cursor: pointer;
-        width: 75px;
-        max-width:75px;
-        height: 75px;
+        min-width:125px;
+        min-height: 125px;
         border: 2px solid white;
         display: flex;
         justify-content: center;

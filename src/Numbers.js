@@ -17,6 +17,7 @@ export const Numbers = () => {
     for (let i = 1; i <= NumbersData.challenges[lang].length; i++) {
         numbers.push({ key: i, value: NumbersData.answers[lang][i - 1] })
     }
+    console.log({ numbers })
     const [tiles, setTiles] = useState(numbers);
     const [guessList, setGuessList] = useState([...numbers]);
     const [numberNames, setNumberNames] = useState(NumbersData.challenges[lang])
@@ -57,7 +58,9 @@ export const Numbers = () => {
     }
 
     const getNumber = e => {
-        const correct = parseInt(e.target.id) === challenge
+        const correct = parseInt(e.target.id) === challenge;
+        console.log(e.target)
+        console.log(parseInt(e.target.id), challenge, { correct })
         setCorrectGuess(correct);
         if (correct) {
             setPicked([...picked, challenge]);
@@ -76,6 +79,12 @@ export const Numbers = () => {
         setTotalGuesses(prev => prev + 1)
     }
 
+    const gridStyle = () => {
+        const style = tiles > 24 ? 'five' : tiles > 15 ? 'four' : 'three';
+        return `tiles ${style}`
+    }
+
+    console.log({ tiles })
     return (
         <>
             <h1>{lang}</h1>
@@ -88,7 +97,7 @@ export const Numbers = () => {
                 <p>{numberNames[challenge - 1]}</p>
             }
 
-            {tiles.length > 0 && <div className="tiles">
+            {tiles.length > 0 && <div className={gridStyle()}>
                 {tiles.map(n => <button onClick={e => getNumber(e)} id={n.key} key={n.key}
                     disabled={picked.includes(n.key)}
                     className={[
